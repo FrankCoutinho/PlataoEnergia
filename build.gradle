@@ -37,7 +37,6 @@ dependencies
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'	
 	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
-	
-	//runtime('org.postgresql:postgresql')
+	compile('org.postgresql:postgresql')
 	//testCompile('org.springframework.boot:spring-boot-starter-test')
 }
