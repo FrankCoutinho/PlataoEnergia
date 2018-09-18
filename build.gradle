@@ -22,7 +22,7 @@ apply plugin: 'io.spring.dependency-management'
 group = 'br.com.plataoenergia'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = 10
+sourceCompatibility = 1.8
 
 repositories
 {
