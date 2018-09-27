@@ -1,5 +1,5 @@
 
-package br.com.plataoenergia.transformers;
+package br.com.plataoenergia.techspec.transformers;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,38 +15,57 @@ import javax.validation.constraints.Size;
 import br.com.plataoenergia.utils.ACConnectionType;
 
 @Entity
-@Table(name = "transformers")
-public class TransformerBean
+@Table(name = "techspecs_transformers")
+public class TechspecTransformer
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@NotNull(message = "A marca não pode ser nula")
-	@Size(min = 1, max = 255, message = "A marca deve conter entre 1 e 255 caracteres")
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String brand;
 
-	@NotNull(message = "O nome não pode ser nulo")
-	@Size(min = 1, max = 255, message = "O nome deve conter entre 1 e 255 caracteres")
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String name;
 
-	@Positive(message = "A potência aparente deve ser maior do que zero")
+	@Positive
 	private double apparentPower;
 
-	@Positive(message = "A tensão primária deve ser maior do que zero")
+	@Positive
 	private double primaryVoltage;
 
-	@Positive(message = "A tensão secundária deve ser maior do que zero")
+	@Positive
 	private double secondaryVoltage;
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "O tipo de conexão não pode ser nulo")
 	private ACConnectionType connectionType;
 
-	public TransformerBean()
+	/* CONSTRUCTORS */
+	
+	public TechspecTransformer()
 	{
 	}
 
+	public TechspecTransformer(String brand, 
+					   String name, 
+					   double apparentPower, 
+					   double primaryVoltage, 
+					   double secondaryVoltage, 
+					   ACConnectionType connectionType)
+	{
+		this.brand = brand;
+		this.name = name;
+		this.apparentPower = apparentPower;
+		this.primaryVoltage = primaryVoltage;
+		this.secondaryVoltage = secondaryVoltage;
+		this.connectionType = connectionType;
+	}
+
+	/* GETTER METHODS */
+	
 	public long getId()
 	{
 		return id;
@@ -82,6 +101,8 @@ public class TransformerBean
 		return connectionType;
 	}
 
+	/* SETTER METHODS */
+	
 	public void setId(long id)
 	{
 		this.id = id;
@@ -117,6 +138,8 @@ public class TransformerBean
 		this.connectionType = connectionType;
 	}
 
+	/* OVERRIDDEN METHODS */
+	
 	@Override
 	public int hashCode()
 	{
@@ -127,6 +150,13 @@ public class TransformerBean
 		return result;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "TransformerBean [id=" + id + ", brand=" + brand + ", name=" + name + ", apparentPower=" + apparentPower + ", primaryVoltage="
+				+ primaryVoltage + ", secondaryVoltage=" + secondaryVoltage + ", connectionType=" + connectionType + "]";
+	}
+	
 	@Override
 	public boolean equals(Object object)
 	{
@@ -139,13 +169,14 @@ public class TransformerBean
 		if (getClass() != object.getClass())
 			return false;
 
-		TransformerBean other = (TransformerBean) object;
+		TechspecTransformer other = (TechspecTransformer) object;
 
 		if (brand == null)
 		{
 			if (other.brand != null)
 				return false;
-		} else
+		} 
+		else
 			if (!brand.equals(other.brand))
 				return false;
 
@@ -153,17 +184,11 @@ public class TransformerBean
 		{
 			if (other.name != null)
 				return false;
-		} else
+		} 
+		else
 			if (!name.equals(other.name))
 				return false;
 
 		return true;
-	}
-
-	@Override
-	public String toString()
-	{
-		return "TransformerBean [id=" + id + ", brand=" + brand + ", name=" + name + ", apparentPower=" + apparentPower + ", primaryVoltage="
-				+ primaryVoltage + ", secondaryVoltage=" + secondaryVoltage + ", connectionType=" + connectionType + "]";
 	}
 }
